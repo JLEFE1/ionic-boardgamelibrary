@@ -1,0 +1,66 @@
+<ion-header no-border>
+  <ion-navbar color="secondary">
+    <ion-title>
+      Boardgame library
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="createBoardgame()"><ion-icon name="cloud-upload"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+
+
+  <ion-list no-lines>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>GameType</ion-label>
+        <ion-select ([ngModel])="searchObject.gameType" (ionChange)="doSearch()">
+          <ion-option *ngFor="let gametype of gameTypes" [value]="gametype">{{gametype}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item (ionInput)="doSearch($event)">
+        <ion-label>Number of players</ion-label>
+        <ion-select [(ngModel)]="searchObject.numberOfPlayer">
+          <ion-option *ngFor="let numberOfPlayer of numberOfPlayers" [value]="numberOfPlayer">{{numberOfPlayer}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item (ionInput)="doSearch($event)">
+        <ion-label>Duration</ion-label>
+        <ion-select [(ngModel)]="searchObject.duration">
+          <ion-option *ngFor="let duration of durations" [value]="duration">{{duration}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+
+
+    <ion-card *ngFor="let boardgame of filteredBoardgames">
+      <ion-card-header>
+        {{boardgame.title}}
+      </ion-card-header>
+
+      <ion-list>
+        <button ion-item>
+          <ion-icon name="cog" item-left></ion-icon>
+          {{boardgame.gameType}}
+        </button>
+
+        <button ion-item>
+          <ion-icon name="body" item-left></ion-icon>
+          {{boardgame.numberOfPlayers}}
+        </button>
+
+        <button ion-item>
+          <ion-icon name="clock" item-left></ion-icon>
+          {{boardgame.duration}}
+        </button>
+
+      </ion-list>
+    </ion-card>
+  </ion-list>
+
+</ion-content>
